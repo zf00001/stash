@@ -1,10 +1,10 @@
 #SUBSCRIBED https://raw.githubusercontent.com/zf2026/stash/refs/heads/main/AD/gddt.stoverride
 name: |-
-高德地图去广告
+  高德地图去广告
 icon: |-
   https://raw.githubusercontent.com/chxm1023/Script_X/main/icon/gaode.png
 desc: |-
-高德地图去广告
+  高德地图去广告
 category: "去广告"
 http:
   mitm:
