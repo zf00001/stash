@@ -1,7 +1,6 @@
 # NAME: Ai Rules
 # UPDATED: 2026-08-18
 
-payload:
 # > Ai general rules
 DOMAIN,api.statsig.com
 DOMAIN,browser-intake-datadoghq.com
