@@ -1,11 +1,10 @@
 name: |-
   AmapAds
 desc: |-
-  AmapAds
-category: "去广告"
+  高德地图去广告
 icon: |-
-  https://github.com/Toperlock/Quantumult/raw/main/icon/Doraemon/Doraemon-1046.png
-
+  https://raw.githubusercontent.com/chxm1023/Script_X/main/icon/gaode.png
+category: "去广告"
 rules:
   - DOMAIN-SUFFIX,optimus-ads.amap.com,DIRECT
 
