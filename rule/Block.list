@@ -1,0 +1,36 @@
+#   # ios上自定义屏蔽域名（减少日记报错）
+# UPDATED: 2026-08-23 07:25:00
+# DOMAIN: 14
+# DOMAIN-SUFFIX: 11
+# DOMAIN-KEYWORD: 3
+# TOTAL: 28
+
+DOMAIN,apm.hexin.cn
+DOMAIN,in.zhihu.com
+DOMAIN,dns.quad9.net
+DOMAIN,speedv6.m.jd.com
+DOMAIN,sealine.youku.com
+DOMAIN,cmonitor.iqiyi.com
+DOMAIN,msmp.abchina.com.cn
+DOMAIN,httpdns.meituan.com
+DOMAIN,mrn.meituan.net
+DOMAIN,feedguess.meituan.com
+DOMAIN,status-ipv6.jpush.cn
+DOMAIN,appcloud2.in.zhihu.com
+DOMAIN,cn-hangzhou.log.aliyuncs.com
+DOMAIN,browser-intake-us5-datadoghq.com
+DOMAIN-SUFFIX,iq.com
+DOMAIN-SUFFIX,umeng.com
+DOMAIN-SUFFIX,ppsimg.com
+DOMAIN-SUFFIX,jddebug.com
+DOMAIN-SUFFIX,ucdl.com.cn
+DOMAIN-SUFFIX,qualcomm.cn
+DOMAIN-SUFFIX,d.meituan.net
+DOMAIN-SUFFIX,sdk.myapp.com
+DOMAIN-SUFFIX,umengcloud.com
+DOMAIN-SUFFIX,agconnect.link
+DOMAIN-SUFFIX,zhihu-cloud.com
+DOMAIN-KEYWORD,ajreport
+DOMAIN-KEYWORD,ipv6_cu.itdog.cn
+DOMAIN-KEYWORD,ipv4_cu.itdog.cn
+

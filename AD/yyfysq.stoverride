@@ -1,0 +1,21 @@
+name: |-
+  粤语翻译神器
+desc: |-
+  粤语翻译神器
+icon: |-
+  https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/VIP.png
+category: "去广告"
+http:
+
+  script:
+    - match: http://api.528529.com/apple_product/
+      name: "yyfysq_vip"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+script-providers:
+  "yyfysq_vip":
+    url: https://raw.githubusercontent.com/zf00001/stash/refs/heads/main/script/yyfysq.js
+    interval: 86400

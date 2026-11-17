@@ -1,0 +1,25 @@
+name: |-
+  万年历
+desc: |-
+  一次性解锁，先开启规则，再进入软件登录即可！需全新安装。
+icon: |-
+  https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/VIP.png
+category: "去广告"
+
+http:
+
+  mitm:
+    - "*.jiemengjia.com"
+
+  script:
+    - match: ^https?:\/\/.*\.jiemengjia\.com\/(member\/(member_info|pay_verify_new|create_order)|dialogue\/adspace)
+      name: "wannianli_9"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+script-providers:
+  "wannianli_9":
+    url: https://raw.githubusercontent.com/zf00001/stash/refs/heads/main/script/wannianli.js
+    interval: 86400

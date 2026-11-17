@@ -1,0 +1,44 @@
+name: |-
+  SoundCloud
+desc: |-
+  Unlocks SoundCloud Go+ features. Hiding the Upgrade tab and the "listen without ads" badge is optional.
+icon: |-
+  https://raw.githubusercontent.com/devchristian1337/loon-plugins/refs/heads/main/App-Icons/soundcloud.png
+category: |-
+  去广告
+system: |-
+  iOS,iPadOS,macOS
+
+homepage: |-
+  https://github.com/devchristian1337/loon-plugins/blob/main/README.md
+date: |-
+  2026-11-01
+
+http:
+
+  mitm:
+    - "api-mobile.soundcloud.com"
+    - "graph.soundcloud.com"
+
+  script:
+    - match: https://api-mobile.soundcloud.com/configuration/ios
+      name: "SoundCloud Go+_13"
+      type: response
+      require-body: true
+      timeout: 10
+      argument: |-
+        [true]
+
+    - match: https://graph.soundcloud.com/graphql
+      name: "SoundCloud Upsells_14"
+      type: response
+      require-body: true
+      timeout: 10
+
+script-providers:
+  "SoundCloud Go+_13":
+    url: https://raw.githubusercontent.com/zf00001/stash/refs/heads/main/script/SoundCloud/soundcloud.js
+    interval: 86400
+  "SoundCloud Upsells_14":
+    url: https://raw.githubusercontent.com/zf00001/stash/refs/heads/main/script/SoundCloud/soundcloud-upsells.js
+    interval: 86400

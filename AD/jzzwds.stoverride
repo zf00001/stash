@@ -1,0 +1,24 @@
+name: |-
+  吉真紫微斗数
+desc: |-
+  吉真紫微斗数
+icon: |-
+  https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Want_Want_1.png
+category: "去广告"
+http:
+
+  mitm:
+    - "zwpp.wzbz123.com"
+
+  script:
+    - match: ^https?:\/\/zwpp\.wzbz123\.com\/api\/.+\/user\/getzwvipinfo
+      name: "jzzwds_9"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+script-providers:
+  "jzzwds_9":
+    url: https://raw.githubusercontent.com/zf00001/stash/refs/heads/main/script/jzzwds.js
+    interval: 86400

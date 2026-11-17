@@ -1,0 +1,33 @@
+name: |-
+  spotify
+author: |-
+  app2smile, 001
+icon: |-
+  https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png
+category: "去广告"
+
+http:
+
+  mitm:
+    - "*-spclient.spotify.com"
+    - "spclient.wg.spotify.com"
+
+  url-rewrite:
+    - >-
+      ^https:\/\/(?:\w+-spclient|spclient\.wg)\.spotify\.com(?::443)?\/artistview\/v1\/artist\/(.*)&platform=iphone https://spclient.wg.spotify.com/artistview/v1/artist/$1&platform=ipad transparent
+    - >-
+      ^https:\/\/(?:\w+-spclient|spclient\.wg)\.spotify\.com(?::443)?\/(?:ad-|pendragon) - reject-200
+
+  script:
+    - match: ^https:\/\/(?:\w+-spclient|spclient\.wg)\.spotify\.com(?::443)?\/(?:bootstrap|user-customization-service)
+      name: "Spotify.Crack_10"
+      type: response
+      require-body: true
+      binary-mode: true
+      argument: |-
+        {"tab":"true","useractivity":"true"}
+
+script-providers:
+  "Spotify.Crack_10":
+    url: https://raw.githubusercontent.com/zf00001/stash/refs/heads/main/script/Spotify.Crack.Dev.js
+    interval: 86400

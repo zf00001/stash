@@ -1,0 +1,136 @@
+name: |-
+  Xiaohongshu
+desc: |-
+  小红书过滤信息流推广，移除图片及视频水印
+icon: |-
+  https://raw.githubusercontent.com/chxm1023/Script_X/main/icon/xiaohongshu.png
+category: |-
+  去广告
+date: |-
+  2026-11-16
+version: |-
+  2026.11.16.2
+
+rules:
+  - AND,((PROTOCOL,QUIC),(DOMAIN-SUFFIX,xiaohongshu.com)),REJECT
+
+http:
+
+  mitm:
+    - "ci.xiaohongshu.com"
+    - "edith.xiaohongshu.com"
+    - "rec.xiaohongshu.com"
+    - "so.xiaohongshu.com"
+    - "www.xiaohongshu.com"
+
+  url-rewrite:
+    - >-
+      (?i)^https:\/\/ci\.xiaohongshu\.com(?::443)?\/system_config\/watermark - reject-200
+    - >-
+      (?i)^https:\/\/edith\.xiaohongshu\.com(?::443)?\/api\/sns\/v1\/surprisebox\/(?:get_style|open|submit_action) - reject-dict
+    - >-
+      (?i)^https:\/\/www\.xiaohongshu\.com(?::443)?\/api\/marketing\/box\/trigger\/?(?:\?[^#]*)?$ - reject-dict
+    - >-
+      (?i)^https:\/\/edith\.xiaohongshu\.com(?::443)?\/api\/sns\/(?:v2\/guide\/user_banner|v3\/note\/guide) - reject-dict
+    - >-
+      (?i)^https:\/\/www\.xiaohongshu\.com(?::443)?\/api\/sns\/(?:v1\/ads\/resource|v2\/hey\/\w+\/hey_gallery) - reject-dict
+
+  body-rewrite:
+    - >-
+      (?i)^https:\/\/edith\.xiaohongshu\.com(?::443)?\/api\/sns\/v1\/search\/banner_list(?:\?[^#]*)?$ response-jq (. as $original | try (if (.data | type) == "object" or (.data | type) == "array" then .data = {} else . end) catch $original)
+    - >-
+      (?i)^https:\/\/edith\.xiaohongshu\.com(?::443)?\/api\/sns\/v1\/search\/hot_list(?:\?[^#]*)?$ response-jq (. as $original | try (if ((getpath(["data"]) // {}) | has("items")) then (setpath(["data","items"]; [])) else . end) catch $original)
+    - >-
+      (?i)^https:\/\/edith\.xiaohongshu\.com(?::443)?\/api\/sns\/v4\/search\/hint response-jq (. as $original | try (if ((getpath(["data"]) // {}) | has("hint_words")) then (setpath(["data","hint_words"]; [])) else . end) catch $original)
+    - >-
+      (?i)^https:\/\/edith\.xiaohongshu\.com(?::443)?\/api\/sns\/v4\/search\/trending\/?(?:\?[^#]*)?$ response-jq (. as $original | try (if ((getpath(["data"]) // {}) | has("queries")) then (setpath(["data","queries"]; [])) else . end) catch $original) | (. as $original | try (if ((getpath(["data"]) // {}) | has("hint_word")) then (setpath(["data","hint_word"]; {})) else . end) catch $original)
+
+  script:
+    - match: (?i)^https:\/\/edith\.xiaohongshu\.com(?::443)?\/api\/sns\/v1\/note\/(?:imagefeed|live_photo\/save)\/?(?:\?[^#]*)?$
+      name: "移除图片和实况照片水印_19"
+      type: response
+      require-body: true
+      max-size: 2097152
+      timeout: 5
+
+    - match: (?i)^https:\/\/edith\.xiaohongshu\.com(?::443)?\/api\/sns\/v1\/system\/service\/ui\/config\/?(?:\?[^#]*)?$
+      name: "移除图片和实况照片水印_19"
+      type: response
+      require-body: true
+      max-size: 2097152
+      timeout: 5
+
+    - match: (?i)^https:\/\/edith\.xiaohongshu\.com(?::443)?\/api\/sns\/v1\/system_service\/config\/?(?:\?[^#]*)?$
+      name: "移除图片和实况照片水印_19"
+      type: response
+      require-body: true
+      max-size: 2097152
+      timeout: 5
+
+    - match: (?i)^https:\/\/edith\.xiaohongshu\.com(?::443)?\/api\/sns\/v2\/system_service\/splash_config\/?(?:\?[^#]*)?$
+      name: "移除图片和实况照片水印_19"
+      type: response
+      require-body: true
+      max-size: 2097152
+      timeout: 5
+
+    - match: (?i)^https:\/\/edith\.xiaohongshu\.com(?::443)?\/api\/sns\/v2\/(?:note\/widgets|user\/followings\/followfeed)\/?(?:\?[^#]*)?$
+      name: "移除图片和实况照片水印_19"
+      type: response
+      require-body: true
+      max-size: 2097152
+      timeout: 5
+
+    - match: (?i)^https:\/\/edith\.xiaohongshu\.com(?::443)?\/api\/sns\/v4\/followfeed\/?(?:\?[^#]*)?$
+      name: "移除图片和实况照片水印_19"
+      type: response
+      require-body: true
+      max-size: 2097152
+      timeout: 5
+
+    - match: (?i)^https:\/\/edith\.xiaohongshu\.com(?::443)?\/api\/sns\/v5\/recommend\/user\/follow_recommend\/?(?:\?[^#]*)?$
+      name: "移除图片和实况照片水印_19"
+      type: response
+      require-body: true
+      max-size: 2097152
+      timeout: 5
+
+    - match: (?i)^https:\/\/edith\.xiaohongshu\.com(?::443)?\/api\/sns\/(?:v1\/interaction\/comment\/video\/download|v5\/note\/comment\/list)\/?(?:\?[^#]*)?$
+      name: "移除图片和实况照片水印_19"
+      type: response
+      require-body: true
+      max-size: 2097152
+      timeout: 5
+
+    - match: (?i)^https:\/\/edith\.xiaohongshu\.com(?::443)?\/api\/sns\/(?:v2\/note\/feed|v3\/note\/videofeed)\/?(?:\?[^#]*)?$
+      name: "移除图片和实况照片水印_19"
+      type: response
+      require-body: true
+      max-size: 2097152
+      timeout: 5
+
+    - match: (?i)^https:\/\/(?:edith|rec)\.xiaohongshu\.com(?::443)?\/api\/sns\/v6\/homefeed\/?(?:\?[^#]*)?$
+      name: "移除图片和实况照片水印_19"
+      type: response
+      require-body: true
+      max-size: 2097152
+      timeout: 5
+
+    - match: (?i)^https:\/\/(?:edith|so)\.xiaohongshu\.com(?::443)?\/api\/sns\/v10\/search\/notes\/?(?:\?[^#]*)?$
+      name: "移除图片和实况照片水印_19"
+      type: response
+      require-body: true
+      max-size: 2097152
+      timeout: 5
+
+    - match: (?i)^https:\/\/(?:edith|rec|www)\.xiaohongshu\.com(?::443)?\/api\/sns\/(?:v4\/note\/videofeed|v10\/note\/video\/save)\/?(?:\?[^#]*)?$
+      name: "移除图片和实况照片水印_19"
+      type: response
+      require-body: true
+      max-size: 2097152
+      timeout: 5
+
+script-providers:
+  "移除图片和实况照片水印_19":
+    url: https://raw.githubusercontent.com/zf00001/stash/refs/heads/main/script/xiaohongshu.js
+    interval: 86400

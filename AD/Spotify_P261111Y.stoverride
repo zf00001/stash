@@ -1,0 +1,78 @@
+name: |-
+  Spotify_P261111Y
+desc: |-
+  适配 Spotify 9.1.98 的 Nebula / Remote Config 接口及 Casita 首页去广告，兼容旧版接口
+icon: |-
+  https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png
+category: |-
+  去广告
+date: |-
+  2026-11-11
+
+rules:
+  - AND,((DOMAIN-SUFFIX,spotify.com),(PROTOCOL,QUIC)),REJECT
+  - DOMAIN,aet.spotify.com,REJECT
+
+http:
+
+  mitm:
+    - "spclient.wg.spotify.com"
+    - "*spclient.spotify.com"
+    - "*-spclient.wg.spotify.com"
+
+  header-rewrite:
+    - >-
+      ^https:\/\/(?:[A-Za-z0-9-]+-)?spclient(?:\.wg)?\.spotify\.com(?::443)?\/(?:user-customization-service\/v1\/customize|nebula\/v1\/configuration\/attributes|remote-config-resolver\/v3\/configuration)\/?(?:\?[^#]*)?$ request-del if-none-match
+
+  url-rewrite:
+    - >-
+      ^https:\/\/(spclient\.wg|.*-spclient)\.spotify\.com(:443)?\/pendragon - reject
+    - >-
+      ^https:\/\/.*-spclient\.spotify\.com(:443)?\/pam-view-service\/ - reject
+    - >-
+      ^https:\/\/.*37i9dQZF1EYkqdzj48dyYq - reject
+    - >-
+      ^https:\/\/(.*-spclient\.spotify\.com(:443)?|spclient\.wg\.spotify\.com)\/gabo-receiver-service - reject-200
+
+  script:
+    - match: ^https:\/\/(?:[A-Za-z0-9-]+-)?spclient(?:\.wg)?\.spotify\.com(?::443)?\/casita\/v1\/home\/default\/?(?:\?[^#]*)?$
+      name: "spotify-home_16"
+      type: response
+      require-body: true
+      max-size: 0
+      binary-mode: true
+
+    - match: ^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/browsita\/v.\/browse
+      name: "spotify-search_17"
+      type: response
+      require-body: true
+      max-size: 0
+      binary-mode: true
+
+    - match: ^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/scrollsita\/v.\/scroll\/spotify
+      name: "spotify-scroll_18"
+      type: response
+      require-body: true
+      max-size: 0
+      binary-mode: true
+
+    - match: ^https:\/\/(?:[A-Za-z0-9-]+-)?spclient(?:\.wg)?\.spotify\.com(?::443)?\/(?:bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize|nebula\/v1\/configuration\/attributes|remote-config-resolver\/v3\/configuration)\/?(?:\?[^#]*)?$
+      name: "spotify-proto_19"
+      type: response
+      require-body: true
+      max-size: 0
+      binary-mode: true
+
+script-providers:
+  "spotify-home_16":
+    url: https://raw.githubusercontent.com/Reukix/ukix/refs/heads/main/js/Spotify-home.js?v=0e4692c6dc47
+    interval: 86400
+  "spotify-search_17":
+    url: https://raw.githubusercontent.com/Reukix/ukix/refs/heads/main/js/Spotify-search.js
+    interval: 86400
+  "spotify-scroll_18":
+    url: https://raw.githubusercontent.com/Reukix/ukix/refs/heads/main/js/Spotify-scroll.js
+    interval: 86400
+  "spotify-proto_19":
+    url: https://raw.githubusercontent.com/Reukix/ukix/refs/heads/main/js/Spotify-proto.js
+    interval: 86400

@@ -1,0 +1,73 @@
+name: |-
+  Taobao
+desc: |-
+  过滤淘宝开屏广告
+icon: |-
+  https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Taobao.png
+category: |-
+  去广告
+date: |-
+  2026-11-16
+version: |-
+  2026.11.16.2
+
+rules:
+  - DOMAIN,adashx.m.taobao.com,REJECT
+  - DOMAIN,ossgw.alicdn.com,REJECT
+  - DOMAIN,ems.youku.com,REJECT
+  - DOMAIN,hudong.alicdn.com,REJECT
+  - DOMAIN,h-adashx.ut.taobao.com,REJECT
+  - DOMAIN,ut.taobao.com,REJECT
+
+http:
+
+  mitm:
+    - "acs.m.taobao.com"
+    - "gw.alicdn.com"
+    - "heic.alicdn.com"
+    - "guide-acs.m.taobao.com"
+    - "poplayer.template.alibaba.com"
+
+  url-rewrite:
+    - >-
+      (?i)^https:\/\/acs\.m\.taobao\.com(?::443)?\/gw\/mtop\.fliggy\.crm\.screen\.(allresource|predict)(?:\/|\?|$) - reject-dict
+    - >-
+      (?i)^https:\/\/acs\.m\.taobao\.com(?::443)?\/gw\/mtop\.alibaba\.advertisementservice\.getadv(?:\/|\?|$) - reject-dict
+    - >-
+      (?i)^https:\/\/acs\.m\.taobao\.com(?::443)?\/gw\/mtop\.alimama\.etao\.config\.query\/.+?etao_advertise - reject-dict
+    - >-
+      (?i)^https:\/\/acs\.m\.taobao\.com(?::443)?\/gw\/mtop\.alimusic\.common\.mobileservice\.startinit(?:\/|\?|$) - reject-dict
+    - >-
+      (?i)^https:\/\/acs\.m\.taobao\.com(?::443)?\/gw\/mtop\.etao\.noah\.query\/.+tao_splash - reject-dict
+    - >-
+      (?i)^https:\/\/acs\.m\.taobao\.com(?::443)?\/gw\/mtop\.film\.mtopadvertiseapi\.queryadvertise(?:\/|\?|$) - reject-dict
+    - >-
+      (?i)^https:\/\/acs\.m\.taobao\.com(?::443)?\/gw\/mtop\.o2o\.ad\.gateway\.get(?:\/|\?|$) - reject-dict
+    - >-
+      (?i)^https:\/\/acs\.m\.taobao\.com(?::443)?\/gw\/mtop\.taobao\.idle\.home\.welcome(?:\/|\?|$) - reject-dict
+    - >-
+      (?i)^https:\/\/acs\.m\.taobao\.com(?::443)?\/gw\/mtop\.trip\.activity\.querytmsresources(?:\/|\?|$) - reject-dict
+    - >-
+      (?i)^https:\/\/(?:gw|heic)\.alicdn\.com(?::443)?\/imgextra\/i\d\/\d*\/?[\w!]+-\d-(?:octopus|tps)-(?:1080|1125)-\d{4}\.(?:jpg|png)_(?:1\d{3}|9\d{2})x(?:\d|1\d{3}|9\d{2})q[59]0 - reject-dict
+    - >-
+      (?i)^https:\/\/guide-acs\.m\.taobao\.com(?::443)?\/gw\/mtop\.taobao\.(volvo\.secondfloor\.getconfig|wireless\.home\.newface\.awesome\.get)(?:\/|\?|$) - reject-dict
+
+  script:
+    - match: (?i)^https:\/\/guide-acs\.m\.taobao\.com(?::443)?\/gw\/mtop\.taobao\.(cloudvideo\.video\.query|wireless\.home\.splash\.awesome\.get)(?:\/|\?|$)
+      name: "移除淘宝开屏广告_25"
+      type: response
+      require-body: true
+      max-size: 2097152
+      timeout: 5
+
+    - match: (?i)^https:\/\/poplayer\.template\.alibaba\.com(?::443)?\/[\w-]+\.json(?:\?[^#]*)?$
+      name: "移除淘宝开屏广告_25"
+      type: response
+      require-body: true
+      max-size: 2097152
+      timeout: 5
+
+script-providers:
+  "移除淘宝开屏广告_25":
+    url: https://raw.githubusercontent.com/zf00001/stash/refs/heads/main/script/taobao.js
+    interval: 86400

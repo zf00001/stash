@@ -1,0 +1,32 @@
+name: |-
+  Weixin_Official_ads
+desc: |-
+  过滤微信公众号广告
+author: |-
+  RuCu6[https://github.com/RuCu6]
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Weixin.png
+openUrl: |-
+  https://apps.apple.com/app/id414478124
+category: |-
+  去广告
+loon_version: |-
+  3.5.1(998)
+homepage: |-
+  https://hub.kelee.one
+date: |-
+  2026-10-02 13:57:49
+
+rules:
+  - DOMAIN-SUFFIX,wxs.qq.com,REJECT
+
+http:
+
+  mitm:
+    - "mp.weixin.qq.com"
+
+  url-rewrite:
+    - >-
+      (?i)^https:\/\/mp\.weixin\.qq\.com\/mp\/(cps_product_info|getappmsgad|jsmonitor|masonryfeed|relatedarticle)\? - reject-dict
+    - >-
+      (?i)^https:\/\/mp\.weixin\.qq\.com\/mp\/relatedsearchword - reject-dict

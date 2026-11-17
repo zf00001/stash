@@ -1,0 +1,30 @@
+name: |-
+  VideoGo
+desc: |-
+  萤石云视频移除开屏广告、首页推广、我的页面推广。
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/VideoGo.png
+category: |-
+  去广告
+date: |-
+  2026-10-01
+
+http:
+
+  mitm:
+    - "api.ys7.com"
+    - "i.ys7.com"
+
+  url-rewrite:
+    - >-
+      (?i)^https:\/\/api\.ys7\.com\/api\/ads - reject
+    - >-
+      (?i)^https:\/\/i\.ys7\.com\/api\/user\/tabList - reject-dict
+    - >-
+      (?i)^https:\/\/api\.ys7\.com\/v3\/config\/service\/entrance\/bannerInfo - reject-dict
+    - >-
+      (?i)^https:\/\/api\.ys7\.com\/v3\/intelligent-app\/apps\/linkage - reject-dict
+    - >-
+      (?i)^https:\/\/api\.ys7\.com\/v3\/configurations\/gray\/info\?(?:[^#?&]+&)*grayTypes=185 - reject-dict
+    - >-
+      (?i)^https:\/\/api\.ys7\.com\/v3\/videoclips\/square\/video\/query - reject-dict

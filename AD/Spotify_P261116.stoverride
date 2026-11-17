@@ -1,0 +1,118 @@
+name: |-
+  Spotify_P261116
+desc: |-
+  1161Y会员配置、首页与播放页去广告，集成歌词补全和双语翻译
+icon: |-
+  https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png
+category: |-
+  去广告
+date: |-
+  2026-11-16
+version: |-
+  2026.11.16.1
+arguments-desc: |-
+  Lyrics：启用歌词补全。Translate：启用歌词翻译。TargetLanguage：翻译目标语言，默认 zh-CN。已有官方歌词优先保留；外部歌词按歌名、歌手和时长匹配。更新后请停用其他 Spotify 歌词模块，避免重复处理同一接口。
+
+rules:
+  - AND,((DOMAIN-SUFFIX,spotify.com),(PROTOCOL,QUIC)),REJECT
+  - DOMAIN,aet.spotify.com,REJECT
+
+http:
+
+  mitm:
+    - "spclient.wg.spotify.com"
+    - "*spclient.spotify.com"
+    - "*-spclient.wg.spotify.com"
+
+  header-rewrite:
+    - >-
+      ^https:\/\/(?:[A-Za-z0-9-]+-)?spclient(?:\.wg)?\.spotify\.com(?::443)?\/(?:user-customization-service\/v1\/customize|nebula\/v1\/configuration\/attributes|remote-config-resolver\/v3\/configuration)\/?(?:\?[^#]*)?$ request-del if-none-match
+
+  url-rewrite:
+    - >-
+      ^https:\/\/(spclient\.wg|.*-spclient)\.spotify\.com(:443)?\/pendragon - reject
+    - >-
+      ^https:\/\/.*-spclient\.spotify\.com(:443)?\/pam-view-service\/ - reject
+    - >-
+      ^https:\/\/.*37i9dQZF1EYkqdzj48dyYq - reject
+    - >-
+      ^https:\/\/(.*-spclient\.spotify\.com(:443)?|spclient\.wg\.spotify\.com)\/gabo-receiver-service - reject-200
+
+  script:
+    - match: ^https:\/\/(?:[A-Za-z0-9-]+-)?spclient(?:\.wg)?\.spotify\.com(?::443)?\/casita\/v1\/home\/default\/?(?:\?[^#]*)?$
+      name: "spotify-home_19"
+      type: response
+      require-body: true
+      max-size: 2097152
+      binary-mode: true
+      timeout: 5
+
+    - match: ^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/browsita\/v.\/browse
+      name: "spotify-search_20"
+      type: response
+      require-body: true
+      max-size: 2097152
+      binary-mode: true
+      timeout: 5
+
+    - match: ^https:\/\/(?:[A-Za-z0-9-]+-)?spclient(?:\.wg)?\.spotify\.com(?::443)?\/scrollsita\/v[0-9]+\/scroll\/spotify:[^?#]+(?:\?[^#]*)?$
+      name: "spotify-scroll_21"
+      type: response
+      require-body: true
+      max-size: 2097152
+      binary-mode: true
+      timeout: 8
+      argument: |-
+        Lyrics="true"&Translate="true"&TargetLanguage="zh-CN"
+
+    - match: ^https:\/\/(?:[A-Za-z0-9-]+-)?spclient(?:\.wg)?\.spotify\.com(?::443)?\/color-lyrics\/v2\/track\/[A-Za-z0-9]{22}(?:\/image\/[^/?#]+)?\/?(?:\?[^#]*)?$
+      name: "spotify-scroll_21"
+      type: response
+      require-body: true
+      max-size: 2097152
+      binary-mode: true
+      timeout: 20
+      argument: |-
+        Lyrics="true"&Translate="true"&TargetLanguage="zh-CN"
+
+    - match: ^https:\/\/(?:[A-Za-z0-9-]+-)?spclient(?:\.wg)?\.spotify\.com(?::443)?\/(?:extended-metadata\/v0\/extended-metadata|metadata\/4\/track\/[a-fA-F0-9]{32})(?:\?[^#]*)?$
+      name: "spotify-scroll_21"
+      type: response
+      require-body: true
+      max-size: 2097152
+      binary-mode: true
+      timeout: 5
+      argument: |-
+        Lyrics="true"&Translate="true"&TargetLanguage="zh-CN"
+
+    - match: ^https:\/\/(?:[A-Za-z0-9-]+-)?spclient(?:\.wg)?\.spotify\.com(?::443)?\/connect-state\/v1\/devices\/[^/?#]+\/?(?:\?[^#]*)?$
+      name: "spotify-scroll_21"
+      type: response
+      require-body: true
+      max-size: 2097152
+      binary-mode: true
+      timeout: 5
+      argument: |-
+        Lyrics="true"&Translate="true"&TargetLanguage="zh-CN"
+
+    - match: ^https:\/\/(?:[A-Za-z0-9-]+-)?spclient(?:\.wg)?\.spotify\.com(?::443)?\/(?:bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize|nebula\/v1\/configuration\/attributes|remote-config-resolver\/v3\/configuration)\/?(?:\?[^#]*)?$
+      name: "spotify-proto_25"
+      type: response
+      require-body: true
+      max-size: 2097152
+      binary-mode: true
+      timeout: 5
+
+script-providers:
+  "spotify-home_19":
+    url: https://raw.githubusercontent.com/zf00001/stash/refs/heads/main/js/Spotify-home.js
+    interval: 86400
+  "spotify-search_20":
+    url: https://raw.githubusercontent.com/zf00001/stash/refs/heads/main/js/Spotify-search.js
+    interval: 86400
+  "spotify-scroll_21":
+    url: https://raw.githubusercontent.com/zf00001/stash/refs/heads/main/js/Spotify-lyrics.js
+    interval: 86400
+  "spotify-proto_25":
+    url: https://raw.githubusercontent.com/zf00001/stash/refs/heads/main/js/Spotify-proto.js
+    interval: 86400

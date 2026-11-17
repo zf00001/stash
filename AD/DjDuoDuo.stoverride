@@ -1,0 +1,32 @@
+name: |-
+  DjDuoDuo
+desc: |-
+  DJ多多移除开屏广告及歌单广告
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/DjDuoDuo.png
+openUrl: |-
+  https://apps.apple.com/app/id1039764887
+category: |-
+  去广告
+
+date: |-
+  2026-11-16（测试可用）
+
+http:
+
+  mitm:
+    - "api.dianyinduoduo.com"
+
+  script:
+    - match: https://api\.dianyinduoduo\.com/v4/config\.php\?
+      name: "DjDuoDuo_8"
+      type: response
+      require-body: true
+      engine: webkit
+      max-size: 4194304
+      timeout: 10
+
+script-providers:
+  "DjDuoDuo_8":
+    url: https://raw.githubusercontent.com/zf00001/stash/refs/heads/main/script/DjDuoDuo.js
+    interval: 86400

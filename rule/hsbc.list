@@ -1,0 +1,25 @@
+# === 香港盈立证券 (uSMART) ===
+DOMAIN-KEYWORD,usmart
+DOMAIN-SUFFIX,usmart.hk
+DOMAIN-SUFFIX,usmartsecurities.com
+DOMAIN-SUFFIX,usmartfx.com
+DOMAIN-KEYWORD,yxzq
+DOMAIN-SUFFIX,yxzq.com
+  
+# === 香港汇丰银行 (HSBC HK) ===
+DOMAIN-KEYWORD,hsbc
+DOMAIN-SUFFIX,hsbc.com.hk
+DOMAIN-SUFFIX,hsbc.com
+DOMAIN-SUFFIX,hsbcnet.com
+DOMAIN-SUFFIX,hsbc.hk
+DOMAIN-SUFFIX,hsbc.com.cn
+DOMAIN-SUFFIX,hsbchongkong.com
+DOMAIN-SUFFIX,aswatson.net
+
+# === 中国银行（香港）(BOC HK) ===
+DOMAIN-KEYWORD,bochk
+DOMAIN-SUFFIX,bochk.com
+DOMAIN-SUFFIX,bancochina.com
+DOMAIN-SUFFIX,boc.cn
+DOMAIN-SUFFIX,bochk.com.cn
+DOMAIN-SUFFIX,bocgroup.com

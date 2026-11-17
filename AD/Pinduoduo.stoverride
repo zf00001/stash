@@ -1,0 +1,107 @@
+name: |-
+  Pinduoduo
+desc: |-
+  拼多多移除开屏广告。
+icon: |-
+  https://github.com/Toperlock/Quantumult/raw/main/icon/Doraemon/Doraemon-1005.png
+category: |-
+  去广告
+date: |-
+  2026-11-16
+version: |-
+  2026.11.16.2
+
+rules:
+  - AND,((URL-REGEX,"^http:\/\/((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\/d(\d)?",extended-matching),(USER-AGENT,"*com.xunmeng.pinduoduo*")),REJECT
+  - AND,((URL-REGEX,"^http:\/\/\[[0-9a-fA-F:]+\]\/d(\d)?\?",extended-matching),(USER-AGENT,"*com.xunmeng.pinduoduo*")),REJECT
+  - AND,((DOMAIN,api.pinduoduo.com,extended-matching),(PROTOCOL,QUIC)),REJECT
+  - DOMAIN,titan.pinduoduo.com,REJECT
+  - DOMAIN,xg.pinduoduo.com,REJECT
+  - DOMAIN,cdl-1.pddpic.com,REJECT
+  - DOMAIN,cdl-p2.pddpic.com,REJECT
+  - DOMAIN,cd-1.pddpic.com,REJECT
+  - DOMAIN,apm.pinduoduo.com,REJECT
+  - DOMAIN,th-b.pinduoduo.com,REJECT
+  - DOMAIN,ta.pinduoduo.com,REJECT
+  - DOMAIN,th.pinduoduo.com,REJECT
+  - DOMAIN,th-a.pinduoduo.com,REJECT
+  - DOMAIN,ta-a.pinduoduo.com,REJECT
+  - DOMAIN,meta.pinduoduo.com,REJECT
+  - DOMAIN,apm-a.pinduoduo.com,REJECT
+
+http:
+
+  mitm:
+    - "api.pinduoduo.com"
+    - "m.pinduoduo.net"
+
+  url-rewrite:
+    - >-
+      (?i)^https:\/\/api\.pinduoduo\.com(?::443)?\/api\/aristotle\/unrated_order_for_unreceived_tab\/?(?:\?[^#]*)?$ - reject-dict
+    - >-
+      (?i)^https:\/\/api\.pinduoduo\.com(?::443)?\/api\/aristotle\/query_order_list_tabs_element\/?(?:\?[^#]*)?$ - reject-dict
+    - >-
+      (?i)^https:\/\/api\.pinduoduo\.com(?::443)?\/api\/aquarius\/hungary\/global\/homepage\/?(?:\?[^#]*)?$ - reject-dict
+    - >-
+      (?i)^https:\/\/api\.pinduoduo\.com(?::443)?\/api\/caterham\/v3\/query\/order_express_group\/?(?:\?[^#]*)?$ - reject-dict
+    - >-
+      (?i)^https:\/\/api\.pinduoduo\.com(?::443)?\/search_hotquery\/?(?:\?[^#]*)?$ - reject-dict
+    - >-
+      (?i)^https:\/\/api\.pinduoduo\.com(?::443)?\/api\/zaire_biz\/chat\/resource\/get_list_data\/?(?:\?[^#]*)?$ - reject-dict
+    - >-
+      (?i)^https:\/\/api\.pinduoduo\.com(?::443)?\/api\/caterham\/v3\/query\/new_chat_group\/?(?:\?[^#]*)?$ - reject-dict
+    - >-
+      (?i)^https:\/\/api\.pinduoduo\.com(?::443)?\/api\/alexa\/goods\/back_up\/?(?:\?[^#]*)?$ - reject-dict
+    - >-
+      (?i)^https:\/\/api\.pinduoduo\.com(?::443)?\/api\/caterham\/v3\/query\/personal\/?(?:\?[^#]*)?$ - reject-dict
+    - >-
+      (?i)^https:\/\/api\.pinduoduo\.com(?::443)?\/api\/brand-olay\/goods_detail\/bybt_guide\/?(?:\?[^#]*)?$ - reject-dict
+    - >-
+      (?i)^https:\/\/api\.pinduoduo\.com(?::443)?\/api\/engels\/reviews\/require\/append\/?(?:\?[^#]*)?$ - reject-dict
+    - >-
+      (?i)^https:\/\/api\.pinduoduo\.com(?::443)?\/api\/caterham\/v3\/query\/my_order_group\/?(?:\?[^#]*)?$ - reject-dict
+    - >-
+      (?i)^https:\/\/api\.pinduoduo\.com(?::443)?\/api\/caterham\/v3\/query\/likes\/?(?:\?[^#]*)?$ - reject-dict
+    - >-
+      (?i)^https:\/\/api\.pinduoduo\.com(?::443)?\/api\/phantom\/gbdbpdv\/extra\/?(?:\?[^#]*)?$ - reject-dict
+    - >-
+      (?i)^https:\/\/api\.pinduoduo\.com(?::443)?\/api\/manufacturer\/cross\/shortcut\/list\/?(?:\?[^#]*)?$ - reject-dict
+    - >-
+      (?i)^https:\/\/api\.pinduoduo\.com(?::443)?\/api\/dunkirk\/liveactivity\/push\/create\/url\/report\/?(?:\?[^#]*)?$ - reject-dict
+    - >-
+      (?i)^https:\/\/api\.pinduoduo\.com(?::443)?\/api\/growth\/nagato\/app\/index\/gather\/?(?:\?[^#]*)?$ - reject-dict
+    - >-
+      (?i)^https:\/\/api\.pinduoduo\.com(?::443)?\/api\/engels\/wait\/receive\/review\/?(?:\?[^#]*)?$ - reject-dict
+    - >-
+      (?i)^https:\/\/api\.pinduoduo\.com(?::443)?\/api\/buffon\/nasus\/recommend\/?(?:\?[^#]*)?$ - reject-dict
+    - >-
+      (?i)^https:\/\/api\.pinduoduo\.com(?::443)?\/api\/caterham\/v2\/query\/goods_detail_with_tags\/?(?:\?[^#]*)?$ - reject-dict
+
+  body-rewrite:
+    - >-
+      (?i)^https:\/\/api\.pinduoduo\.com(?::443)?\/api\/alexa\/homepage\/hub\/?(?:\?[^#]*)?$ response-jq (. as $original | try (delpaths([["result","dy_module","irregular_banner_dy"]])) catch $original) | (. as $original | try (delpaths([["result","icon_set"]])) catch $original) | (. as $original | try (delpaths([["result","search_bar_hot_query"]])) catch $original) | (. as $original | try (if (.result.bottom_tabs | type) == "array" then .result.bottom_tabs |= map(. as $item | try (select(.link | IN("index.html", "chat_list.html", "personal.html"))) catch $item) else . end | if (.result.buffer_bottom_tabs | type) == "array" then .result.buffer_bottom_tabs |= map(. as $item | try (select(.link | IN("index.html", "chat_list.html", "personal.html"))) catch $item) else . end | if (.result.all_top_opts | type) == "array" then .result.all_top_opts |= map(if type == "object" then del(.selected_image,.image,.height,.width) else . end) else . end) catch $original)
+    - >-
+      (?i)^https:\/\/api\.pinduoduo\.com(?::443)?\/search\/?(?:\?[^#]*)?$ response-jq (. as $original | try (delpaths([["expansion"]])) catch $original)
+    - >-
+      (?i)^https:\/\/api\.pinduoduo\.com(?::443)?\/api\/philo\/personal\/hub\/?(?:\?[^#]*)?$ response-jq (. as $original | try (delpaths([["monthly_card_entrance"]])) catch $original) | (. as $original | try (delpaths([["personal_center_style_v2_vo"]])) catch $original) | (. as $original | try (delpaths([["icon_set","icons"]])) catch $original) | (. as $original | try (delpaths([["icon_set","top_personal_icons"]])) catch $original) | (. as $original | try (delpaths([["personal_banner"]])) catch $original)
+    - >-
+      (?i)^https:\/\/api\.pinduoduo\.com(?::443)?\/api\/oak\/integration\/render\/?(?:\?[^#]*)?$ response-jq (. as $original | try (delpaths([["bottom_section_list"]])) catch $original) | (. as $original | try (delpaths([["ui","bottom_section"]])) catch $original) | (. as $original | try (delpaths([["ui","live_section","float_info"]])) catch $original)
+    - >-
+      (?i)^https:\/\/api\.pinduoduo\.com(?::443)?\/api\/caterham\/v3\/query\/order_detail_group\/?(?:\?[^#]*)?$ response-jq (. as $original | try (delpaths([["data","goods_list"]])) catch $original)
+    - >-
+      (?i)^https:\/\/api\.pinduoduo\.com(?::443)?\/order\/ response-jq (. as $original | try (delpaths([["marketing_banner_vo"]])) catch $original) | (. as $original | try (delpaths([["shipping","banner_above_recommend"]])) catch $original)
+    - >-
+      (?i)^https:\/\/api\.pinduoduo\.com(?::443)?\/api\/aristotle\/order_list_v4\/?(?:\?[^#]*)?$ response-jq (. as $original | try (if (.orders | type) == "array" then .orders |= map(. as $order | try (if (.order_buttons | type) == "array" then .order_buttons |= map(if type == "object" then del(.order_growth_tip) else . end) else . end) catch $order) else . end) catch $original)
+
+  script:
+    - match: (?i)^https:\/\/m\.pinduoduo\.net(?::443)?\/mdkd\/package\/?\?(?:[^#?&]+&)*from_app_scan(?:=[^&#]*)?(?:&[^#]*)?$
+      name: "移除扫码取件页面商品推荐及弹窗_52"
+      type: response
+      require-body: true
+      max-size: 2097152
+      timeout: 5
+
+script-providers:
+  "移除扫码取件页面商品推荐及弹窗_52":
+    url: https://raw.githubusercontent.com/zf00001/stash/refs/heads/main/script/pinduoduo.js
+    interval: 86400

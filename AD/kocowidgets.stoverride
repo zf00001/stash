@@ -1,0 +1,34 @@
+name: |-
+  KocoWidgets
+desc: |-
+  KocoWidgets会员破解
+icon: |-
+  https://github.com/Toperlock/Quantumult/raw/main/icon/Doraemon/Doraemon-1017.png
+date: |-
+  2026-11-16
+version: |-
+  2026.11.16.1
+
+http:
+
+  mitm:
+    - "api.revenuecat.com"
+    - "api.rc-backup.com"
+
+  script:
+    - match: ^https:\/\/api\.(?:revenuecat|rc-backup)\.com(?::443)?\/v1\/(?:subscribers\/[^/?#]+\/?|receipts\/?)(?:\?[^#]*)?$
+      name: "koco-request_5"
+      type: request
+      timeout: 5
+
+    - match: ^https:\/\/api\.(?:revenuecat|rc-backup)\.com(?::443)?\/v1\/(?:subscribers\/[^/?#]+\/?|receipts\/?)(?:\?[^#]*)?$
+      name: "koco-request_5"
+      type: response
+      require-body: true
+      max-size: 2097152
+      timeout: 5
+
+script-providers:
+  "koco-request_5":
+    url: https://raw.githubusercontent.com/zf00001/stash/refs/heads/main/script/kocowidgets.js
+    interval: 86400

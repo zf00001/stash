@@ -1,0 +1,34 @@
+name: |-
+  京东比价2
+desc: |-
+  首次使用需安装慢慢买应用，之后点击进入[我的]页面以捕获Cookie，捕获成功后方可在商品详情页面查看比价内容。
+author: |- 
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/JD.png
+openUrl: |-
+  https://apps.apple.com/app/id414245413
+category: "Tools"
+
+http:
+
+  mitm:
+    - "in.m.jd.com"
+    - "apapia-sqk-weblogic.manmanbuy.com"
+
+  script:
+    - match: ^https?:\/\/apapia-sqk-weblogic\.manmanbuy\.com\/baoliao\/center\/menu$
+      name: "jd_price2"
+      type: request
+      require-body: true
+      timeout: 10
+
+    - match: ^https?:\/\/in\.m\.jd\.com\/product\/graphext\/\d+\.html
+      name: "jd_price2"
+      type: response
+      require-body: true
+      timeout: 10
+
+script-providers:
+  "jd_price2":
+    url: https://raw.githubusercontent.com/zf00001/stash/refs/heads/main/script/jd_price2.js
+    interval: 86400

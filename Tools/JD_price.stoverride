@@ -1,0 +1,34 @@
+name: |-
+  京东比价
+desc: |-
+  京东App历史价格（商品详情页面触发）表格，首次使用需安装慢慢买应用，之后点击进入[我的]页面以捕获Cookie，捕获成功后方可在商品详情页面查看比价内容。
+icon: |-
+  https://raw.githubusercontent.com/chxm1023/Script_X/main/icon/jd.png
+arguments-desc: |-
+  [参数设置]\n1. MMMCK_SCRIPT:JD_158 脚本前往慢慢买App获取Cookie\n2.避免不必要的重写，禁用请设置为"#"
+category: "Tools"
+http:
+
+  mitm:
+    - "in.m.jd.com"
+    - "apapia-sqk-weblogic.manmanbuy.com"
+
+  script:
+    - match: ^https?:\/\/apapia-sqk-weblogic\.manmanbuy\.com\/baoliao\/center\/menu$
+      name: "JD_158"
+      type: request
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+    - match: ^https?:\/\/in\.m\.jd\.com\/product\/graphext\/\d+\.html
+      name: "JD_158"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+script-providers:
+  "JD_158":
+    url: https://raw.githubusercontent.com/zf00001/stash/refs/heads/main/script/jd_price.js
+    interval: 86400

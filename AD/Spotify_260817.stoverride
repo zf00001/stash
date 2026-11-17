@@ -1,0 +1,38 @@
+name: |-
+  Spotify_260817(<=9.1.14)
+desc: |-
+  2026.08.17 (>=iOS15)版本号9.1.14.877及以下有效，部分解锁premium,音质不能设置为超高(建议登录后再打开脚本,重启app等待脚本生效)
+icon: |-
+  https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png
+category: "去广告"
+http:
+
+  mitm:
+    - "spclient.wg.spotify.com"
+    - "*spclient.spotify.com"
+
+  header-rewrite:
+# if-none-match返回304状态码
+    - >-
+      ^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/user-customization-service\/v1\/customize$ request-del if-none-match
+
+  script:
+    - match: ^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/(artistview\/v1\/artist|album-entity-view\/v2\/album)\/
+      name: "spotify-json_6"
+      type: request
+      require-body: false
+
+    - match: ^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/(bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize)$
+      name: "spotify-proto_8"
+      type: response
+      require-body: true
+      max-size: 0
+      binary-mode: true
+
+script-providers:
+  "spotify-json_6":
+    url: https://raw.githubusercontent.com/zf00001/stash/refs/heads/main/script/spotify-json.js
+    interval: 86400
+  "spotify-proto_8":
+    url: https://raw.githubusercontent.com/zf00001/stash/refs/heads/main/script/spotify-proto.js
+    interval: 86400

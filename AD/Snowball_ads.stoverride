@@ -1,0 +1,92 @@
+name: |-
+  Snowball_ads
+desc: |-
+  雪球移除开屏广告、各类广告
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Snowball.png
+
+category: |-
+  去广告
+
+http:
+
+  mitm:
+    - "api.xueqiu.com"
+    - "open.xueqiu.com"
+    - "stock.xueqiu.com"
+    - "fund.xueqiu.com"
+    - "39.103.79.14"
+    - "39.106.97.84"
+    - "47.95.49.75"
+    - "101.201.62.20"
+    - "101.201.62.26"
+    - "101.201.175.228"
+    - "124.250.48.3"
+    - "182.92.145.50"
+    - "182.92.251.113"
+
+  url-rewrite:
+    - >-
+      (?i)^https:\/\/api\.xueqiu\.com\/snowpard\/launch_strategy\/query\.json\? - reject-dict
+    - >-
+      (?i)^https:\/\/open\.xueqiu\.com\/mpaas\/config\/content\?.+home_visitor_relation_config - reject-dict
+    - >-
+      (?i)^https:\/\/api\.xueqiu\.com\/ucprofile\/api\/user\/batchGetUserBasicInfo\.json - reject-dict
+    - >-
+      (?i)^https:\/\/api\.xueqiu\.com\/lightsnow\/launch\/plan\/bee\/query\.json\? - reject-dict
+    - >-
+      (?i)^https:\/\/api\.xueqiu\.com\/lightsnow\/optional\/banner\/query\.json - reject-dict
+    - >-
+      (?i)^https:\/\/api\.xueqiu\.com\/snowflake-theme\/query\/v1\/hot_event\/rich_tag_new\.json\? - reject-dict
+    - >-
+      (?i)^https:\/\/api\.xueqiu\.com\/query\/search\/ai\/v2\/recommend_search\.json\? - reject-dict
+    - >-
+      (?i)^https:\/\/api\.xueqiu\.com\/query\/v1\/hot_event\/tag\.json\? - reject-dict
+    - >-
+      (?i)^https:\/\/open\.xueqiu\.com\/mpaas\/config\/content\?.+cube_detail_bottom_operation_trade_button - reject-dict
+    - >-
+      (?i)^https:\/\/api\.xueqiu\.com\/recommend-proxy\/card\/zj_card\.json\?(?:[^#?&]+&)*feed_id=207 - reject-dict
+    - >-
+      (?i)^https:\/\/api\.xueqiu\.com\/recommend-proxy\/card\/portfolio_tab_symbol\.json - reject-dict
+    - >-
+      (?i)^https:\/\/stock\.xueqiu\.com\/v5\/stock\/group\/recommend\/default\/list\.json - reject-dict
+    - >-
+      (?i)^https:\/\/api\.xueqiu\.com\/livestream\/structure\/live\/hotCard\.json - reject-dict
+    - >-
+      (?i)^https:\/\/fund\.xueqiu\.com\/fundx\/activity\/x\/web\/c\/index\/dataByCode\? - reject-dict
+    - >-
+      (?i)^https:\/\/api\.xueqiu\.com\/analysis\/status\/v4\/underlying_product\.json\? - reject-dict
+    - >-
+      (?i)^https:\/\/api\.xueqiu\.com\/rainbow\/ai\/question\/generate\/status_question\.json\? - reject-dict
+
+  body-rewrite:
+    - >-
+      (?i)^https:\/\/open\.xueqiu\.com\/mpaas\/config\/content\?.*timeline_tab_name response-jq delpaths([["data","im_notice_show"]])
+    - >-
+      (?i)^https:\/\/open\.xueqiu\.com\/mpaas\/config\/content\?.*timeline_tab_name response-jq delpaths([["data","request_notice_show"]])
+    - >-
+      (?i)^https:\/\/open\.xueqiu\.com\/mpaas\/config\/content\?.*timeline_tab_name response-jq delpaths([["data","timeline_tab_name"]])
+    - >-
+      (?i)^https:\/\/open\.xueqiu\.com\/mpaas\/config\/content\?.*timeline_tab_name response-jq delpaths([["data","profileMenuConfig_anonymous_V12"]])
+    - >-
+      (?i)^https:\/\/open\.xueqiu\.com\/mpaas\/config\/content\?.*timeline_tab_name response-jq delpaths([["data","trade_open_account_promotion_url"]])
+    - >-
+      (?i)^https:\/\/open\.xueqiu\.com\/mpaas\/config\/content\?.*timeline_tab_name response-jq delpaths([["data","trade_unify_open_account_list"]])
+    - >-
+      (?i)^https:\/\/open\.xueqiu\.com\/mpaas\/config\/content\?.*timeline_tab_name response-jq delpaths([["data","community_ad_download_msg"]])
+    - >-
+      (?i)^https:\/\/open\.xueqiu\.com\/mpaas\/config\/content\?.*timeline_tab_name response-jq delpaths([["data","home_tab_dynamic"]])
+    - >-
+      (?i)^https:\/\/open\.xueqiu\.com\/mpaas\/config\/content\?.*timeline_tab_name response-jq delpaths([["data","home_tab_dynamic_before"]])
+    - >-
+      (?i)^https:\/\/open\.xueqiu\.com\/mpaas\/config\/content\?.*timeline_tab_name response-jq delpaths([["data","home_tab_dynamic_after"]])
+    - >-
+      (?i)^https:\/\/open\.xueqiu\.com\/mpaas\/config\/content\?.*timeline_tab_name response-jq delpaths([["data","isitor_page_login_config"]])
+    - >-
+      (?i)^https:\/\/open\.xueqiu\.com\/mpaas\/config\/content\?.*timeline_tab_name response-jq delpaths([["data","open_wechat_mini_app_config"]])
+    - >-
+      (?i)^https:\/\/open\.xueqiu\.com\/mpaas\/config\/content\?.*timeline_tab_name response-jq delpaths([["data","user_guide_contact_config"]])
+    - >-
+      (?i)^https:\/\/open\.xueqiu\.com\/mpaas\/config\/content\?.*timeline_tab_name response-jq delpaths([["data","brokers_router_config"]])
+    - >-
+      (?i)^https:\/\/open\.xueqiu\.com\/mpaas\/config\/content\?.*timeline_tab_name response-jq delpaths([["data","my_page_right_items"]])

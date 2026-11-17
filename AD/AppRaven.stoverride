@@ -1,0 +1,25 @@
+name: |-
+  AppRaven
+desc: |-
+  AppRaven
+icon: |-
+  https://raw.githubusercontent.com/luestr/IconResource/refs/heads/main/App_icon/120px/AppRaven.png
+category: "去广告"
+
+http:
+
+  mitm:
+    - "appraven.net"
+
+  script:
+    - match: https://appraven.net/appraven/graphql
+      name: "AppRaven_Vip"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+script-providers:
+  "AppRaven_Vip":
+    url: https://raw.githubusercontent.com/zf00001/stash/refs/heads/main/script/AppRaven.js
+    interval: 86400

@@ -1,0 +1,36 @@
+name: |-
+  京东去广告
+desc: |-
+  兼容 URL 参数与 POST 路由、明文和 base64 响应，过滤开屏配置和推广楼层；正常业务响应原样放行。
+icon: |-
+  https://raw.githubusercontent.com/chxm1023/Script_X/main/icon/jd.png
+category: |-
+  去广告
+date: |-
+  2026-11-16
+version: |-
+  2026.11.16.1
+
+http:
+
+  mitm:
+    - "api.m.jd.com"
+
+  url-rewrite:
+    - >-
+      ^http:\/\/\w{32}\.jddebug\.com(?::80)?\/diagnose\? - reject
+    - >-
+      (?i)^https:\/\/api\.m\.jd\.com(?::443)?\/client\.action\?(?:[^#?&]+&)*functionId=(searchBoxWord|stationPullService|uniformRecommend[06])(?:&|$) - reject-dict
+
+  script:
+    - match: (?i)^https:\/\/api\.m\.jd\.com(?::443)?\/client\.action(?:\?|$)
+      name: "jd-adblock_10"
+      type: response
+      require-body: true
+      max-size: 2097152
+      timeout: 5
+
+script-providers:
+  "jd-adblock_10":
+    url: https://raw.githubusercontent.com/zf00001/stash/refs/heads/main/script/jd.js
+    interval: 86400
