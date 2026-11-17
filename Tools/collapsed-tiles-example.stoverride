@@ -1,0 +1,59 @@
+name: 控制面板_统计
+icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png
+desc: >
+  第三方服务，通过IPPure.com展示。
+category: "Tools"
+tiles:
+  - name: IPPure-IP-Info
+    title: IPPure IP Info
+    icon: https://ippure.com/logo.png
+    collapsed: true
+    url: https://ippure.com
+  - name: IPPure-IP-Fraud-Score
+    title: IPPure IP Fraud Score
+    icon: https://ippure.com/logo.png
+    collapsed: true
+    url: https://ippure.com
+  - name: IPPure-IP-Native-Check
+    title: IPPure IP Native Check
+    icon: https://ippure.com/logo.png
+    collapsed: true
+    url: https://ippure.com
+  - name: ChatGPT-Web-Check
+    title: ChatGPT Web
+    icon: https://fastly.jsdelivr.net/gh/StashNetworks/misc@main/collapsed-tiles/img/chatgpt.png
+    collapsed: true
+    url: https://chatgpt.com
+  - name: ChatGPT-App-Check
+    title: ChatGPT App
+    icon: https://fastly.jsdelivr.net/gh/StashNetworks/misc@main/collapsed-tiles/img/chatgpt.png
+    collapsed: true
+    url: https://chatgpt.com
+  - name: YouTube-Check
+    title: YouTube
+    icon: https://fastly.jsdelivr.net/gh/StashNetworks/misc@main/collapsed-tiles/img/youtube.png
+    collapsed: true
+    url: https://www.youtube.com
+  - name: Netflix-Check
+    title: Netflix
+    icon: https://fastly.jsdelivr.net/gh/StashNetworks/misc@main/collapsed-tiles/img/netflix.png
+    collapsed: true
+    url: https://www.netflix.com
+script-providers:
+  IPPure-IP-Info:
+    url: https://raw.githubusercontent.com/zf00001/stash/refs/heads/main/script/cs/ippure-ip-info.js
+    path: ippure/ip-info.js
+  IPPure-IP-Fraud-Score:
+    url: https://raw.githubusercontent.com/zf00001/stash/refs/heads/main/script/cs/ippure-ip-fraud-score.js
+    path: ippure/ip-fraud-score.js
+  IPPure-IP-Native-Check:
+    url: https://raw.githubusercontent.com/zf00001/stash/refs/heads/main/script/cs/ippure-ip-native-check.js
+    path: ippure/ip-native-check.js
+  ChatGPT-Web-Check:
+    url: https://raw.githubusercontent.com/zf00001/stash/refs/heads/main/script/cs/chatgpt-web.js
+  ChatGPT-App-Check:
+    url: https://raw.githubusercontent.com/zf00001/stash/refs/heads/main/script/cs/chatgpt-app.js
+  YouTube-Check:
+    url: https://raw.githubusercontent.com/zf00001/stash/refs/heads/main/script/cs/youtube.js
+  Netflix-Check:
+    url: https://raw.githubusercontent.com/zf00001/stash/refs/heads/main/script/cs/netflix.js

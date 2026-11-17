@@ -1,7 +1,7 @@
-name: 控制面板第三方服务
+name: 控制面板_统计
 icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png
 desc: >
-  第三方服务，通过IPPure.com展示是否原生IP。
+  第三方服务，通过IPPure.com展示是否原生IP
 category: "Tools"
 tiles:
   - name: IPPure-IP-Info
@@ -21,22 +21,22 @@ tiles:
     url: https://ippure.com
   - name: ChatGPT-Web-Check
     title: ChatGPT Web
-    icon: https://raw.githubusercontent.com/chxm1023/Script_X/main/icon/ChatGPT/ChatGPT5.png
+    icon: https://fastly.jsdelivr.net/gh/StashNetworks/misc@main/collapsed-tiles/img/chatgpt.png
     collapsed: true
     url: https://chatgpt.com
   - name: ChatGPT-App-Check
     title: ChatGPT App
-    icon: https://raw.githubusercontent.com/chxm1023/Script_X/main/icon/ChatGPT/ChatGPT6.png
+    icon: https://fastly.jsdelivr.net/gh/StashNetworks/misc@main/collapsed-tiles/img/chatgpt.png
     collapsed: true
     url: https://chatgpt.com
   - name: YouTube-Check
     title: YouTube
-    icon: https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/YouTube.png
+    icon: https://fastly.jsdelivr.net/gh/StashNetworks/misc@main/collapsed-tiles/img/youtube.png
     collapsed: true
     url: https://www.youtube.com
   - name: Netflix-Check
     title: Netflix
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Netflix.png
+    icon: https://fastly.jsdelivr.net/gh/StashNetworks/misc@main/collapsed-tiles/img/netflix.png
     collapsed: true
     url: https://www.netflix.com
 script-providers:
