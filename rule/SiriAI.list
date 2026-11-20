@@ -1,14 +1,15 @@
 # Apple Intelligence/SiriAi rules
-# UPDATED: 2026-09-17 23:39:00
-# DOMAIN: 7
-# DOMAIN-SUFFIX: 14
-# TOTAL: 21
+# UPDATED: 2026-11-18
+# DOMAIN: 9
+# DOMAIN-SUFFIX: 20
+# TOTAL: 29
 # == Apple苹果智能 & 活动流媒体 & DNS ==
 DOMAIN,guzzoni.apple.com
 DOMAIN,mask-api.fe.apple-dns.net
 DOMAIN,mask-api.icloud.com
 DOMAIN,mask-t.apple-dns.net
 DOMAIN,mask.apple-dns.net
+DOMAIN,mask-canary.icloud.com
 DOMAIN,apple-events.akamaized.net
 DOMAIN,doh.dns.apple.com
 DOMAIN,gspe1-ssl.ls.apple.com
@@ -25,3 +26,10 @@ DOMAIN-SUFFIX,mask-h2.icloud.com
 DOMAIN-SUFFIX,mask.icloud.com
 DOMAIN-SUFFIX,apps.mzstatic.com
 DOMAIN-SUFFIX,api-siri-prod.apple.com
+DOMAIN-SUFFIX,mask-h3.icloud.com
+DOMAIN-SUFFIX,aaplimg.com
+DOMAIN-SUFFIX,gdmf.apple.com
+DOMAIN-SUFFIX,mesu.apple.com
+DOMAIN-SUFFIX,configuration.apple.com
+DOMAIN-SUFFIX,humb.apple.com
+DOMAIN-SUFFIX,bag.itunes.apple.com
