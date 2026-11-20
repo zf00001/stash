@@ -1,0 +1,22 @@
+name: 'GitHub Raw 走 CDN'
+desc: '把 raw.githubusercontent.com 的请求自动改写到可用的 CDN 加速地址。'
+openUrl: 'https://github.com'
+icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/04ProxySoft/github.png
+category: '去广告'
+date: '2026-11-16'
+
+http:
+  mitm:
+    - 'raw.githubusercontent.com'
+  script:
+    - name: 'gh-raw-cdn'
+      match: '^https?://raw\.githubusercontent\.com/.+'
+      type: request
+      timeout: 5
+      engine: auto
+
+script-providers:
+  gh-raw-cdn:
+    url: 'https://raw.githubusercontent.com/zf00001/stash/refs/heads/main/script/GitHubRawCDN.js'
+    interval: 86400
+
